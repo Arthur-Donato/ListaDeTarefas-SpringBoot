@@ -75,5 +75,24 @@ public class TaskController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A tarefa nao foi encontrada");
         }
 
+        var taskModel = task.get();
+
+        BeanUtils.copyProperties(taskRecord, taskModel);
+
+        return ResponseEntity.status(HttpStatus.OK).body(taskRepository.save(taskModel));
+    }
+
+    @PutMapping(path = "/put/{id}/complete")
+    public ResponseEntity<Object> putTaskComplete(@PathVariable(value = "id") UUID id){
+        Optional<TaskModel> taskOptional = taskRepository.findById(id);
+
+        if(taskOptional.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("A tarefa nao foi encontrada");
+        }
+
+        var taskModel = taskOptional.get();
+        taskModel.setComplete(!taskModel.isComplete());
+
+        return ResponseEntity.status(HttpStatus.OK).body(taskRepository.save(taskModel));
     }
 }
