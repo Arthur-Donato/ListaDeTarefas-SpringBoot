@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Minha Lista de Tarefas</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+<h1>Adicionar nova tarefa</h1>
+<form th:action="@{/add}" th:object="${task}" method="post">
+    <label>
+        <input type="text" th:field="*{title}" required placeholder="Insira o nome da tarefa"/>
+        <input type="text" th:field="*{description}" required placeholder="Insira a descricao da tarefa"/>
+        <Button>Confirmar</Button>
+    </label>
+</form>
+</body>
+</html>

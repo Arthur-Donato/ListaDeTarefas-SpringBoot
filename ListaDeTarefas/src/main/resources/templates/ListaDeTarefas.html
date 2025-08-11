@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Minha Lista de Tarefas</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de Tarefas</h1>
+
+<ul>
+    <li th:each="task : ${tasks}">
+        <span th:class="${task.isComplete ? 'completed' : ''}" th:text="*{task.title}"></span>
+    </li>
+</ul>
+
+</body>
+</html>

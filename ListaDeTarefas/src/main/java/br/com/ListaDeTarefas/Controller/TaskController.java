@@ -7,6 +7,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +24,12 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
+    private TaskRepository taskRepository;
 
     @Autowired
-    TaskRepository taskRepository;
+    public TaskController(TaskRepository taskRepository){
+        this.taskRepository = taskRepository;
+    }
 
     @GetMapping
     public ResponseEntity<List<TaskModel>> getAllTasks(){

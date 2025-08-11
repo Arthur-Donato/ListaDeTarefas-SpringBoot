@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Minha Lista de Tarefas</title>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+<h1>Editar tarefa</h1>
+<form th:action="@{/edit/{id}(id=${taskID})}" th:object="${task}" method="post">
+    <label>
+        <input type="text" th:field="*{title}"  placeholder="Insira o novo nome da tarefa">
+        <input type="text" th:field="*{description}" placeholder="Insira o novo nome da tarefa">
+        <Button>Confirmar</Button>
+    </label>
+</form>
+</body>
+</html>
